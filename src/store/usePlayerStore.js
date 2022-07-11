@@ -23,8 +23,8 @@ const decreaseTimeticks = async (set, get) => {
   }
 
   set({
-    timeTicks1: timeTicks1 - 1,    
-    timeTicks2: timeTicks2 - 2
+    timeTicks1: currentPlayer == 0 ? timeTicks1 - 1 : timeTicks1,
+    timeTicks2: currentPlayer == 1 ? timeTicks2 - 1 : timeTicks2
   });
 }
 
@@ -52,6 +52,8 @@ const nextTurn = async (set, get, newBoard) => {
 const moveBackward = async (set, get) => {
   const {
     currentPlayer,
+    timeTicks1,
+    timeTicks2,
     boardState,
     stepAfterHistory,    
     stepBackHistory
@@ -59,7 +61,11 @@ const moveBackward = async (set, get) => {
   
   if (stepBackHistory.length <= 0)
     return;
-  stepAfterHistory.push(boardState)
+  stepAfterHistory.push({
+    board: boardState,
+    ticks1: timeTicks1,    
+    ticks2: timeTicks2    
+  })
   const prevState = stepBackHistory.pop();
   set({
     stepBackHistory: [...stepBackHistory],
@@ -76,6 +82,7 @@ const moveForward = async (set, get) => {
     timeTicks1,
     timeTicks2,
     boardState,
+    currentPlayer,
     stepAfterHistory,    
     stepBackHistory
   } = get();
@@ -91,7 +98,10 @@ const moveForward = async (set, get) => {
   set({
     stepBackHistory: [...stepBackHistory],
     stepAfterHistory: [...stepAfterHistory],
-    boardState: nextState,
+    boardState: nextState.board,
+    timeTicks1: nextState.ticks1,
+    timeTicks2: nextState.ticks2,
+    currentPlayer: 1 - currentPlayer
   });
 }
 
@@ -100,7 +110,7 @@ const startGame = async (set, get, newBoard) => {
     timeTicks1: TIME_LIMIT,
     timeTicks2: TIME_LIMIT,
     currentPlayer: 0,
-    isPlaying: false,
+    isPlaying: true,
     winner: -1, 
     boardState: "",
     stepBackHistory: [],
