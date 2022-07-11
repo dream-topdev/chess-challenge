@@ -21,6 +21,7 @@ export default function Timer() {
   useEffect(() => {
     const interval = setInterval(() => {
       decreaseTimeticks();
+      console.log("1");
     }, 1000);
     return () => clearInterval(interval);
   }, []);
