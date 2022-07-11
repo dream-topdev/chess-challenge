@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Grid';
+import Game from './Game';
+import { Stack } from '@mui/material';
+import Timer from './components/Timer';
+import ActionButtons from './components/ActionButtons';
 
-function App() {
+export default function App() {  
+  const [chessboardSize, setChessboardSize] = useState(undefined);
+  
+  useEffect(() => {
+    function handleResize() {
+      const display = document.getElementsByClassName('container')[0];
+      setChessboardSize(display.offsetWidth - 20);
+    }
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container spacing={2}>      
+      <Grid className="container" item xs={8}>
+        <Game boardWidth={chessboardSize}/>
+      </Grid>
+      <Grid item xs={4}>
+        <Stack>
+          <Timer/>
+          <ActionButtons/>
+        </Stack>
+      </Grid>
+    </Grid>
   );
 }
-
-export default App;
