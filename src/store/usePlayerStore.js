@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { devtools, persist } from 'zustand/middleware'
 import { TIME_LIMIT } from '../utils/consts';
 
 const decreaseTimeticks = async (set, get) => {
@@ -143,7 +143,10 @@ const playerStore = (set,get) => ({
     isRedoable: () => get().stepAfterHistory.length > 0
   })
   
-const usePlayerStore = create(devtools(playerStore))
+const usePlayerStore = create(devtools(persist(
+  playerStore, {
+    name: "player-storage",
+  })))
 
 export default usePlayerStore
   

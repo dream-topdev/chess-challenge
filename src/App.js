@@ -10,11 +10,12 @@ import SplashContainer from './components/SplashContainer';
 import usePlayerStore from './store/usePlayerStore';
 
 export default function App() {  
-  const [chessboardSize, setChessboardSize] = useState(undefined);
-  const [splashModal, setSplashModal] = useState(true);
   const {
+    isPlaying,
     startGame,
   } = usePlayerStore(state => state);
+  const [chessboardSize, setChessboardSize] = useState(undefined);
+  const [splashModal, setSplashModal] = useState(!isPlaying);
   
   useEffect(() => {
     function handleResize() {
@@ -29,6 +30,11 @@ export default function App() {
     handleResize();
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    if (isPlaying == false)
+      setSplashModal(true);
+  }, [isPlaying])
 
   return (
     <Box   
