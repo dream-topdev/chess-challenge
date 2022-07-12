@@ -16,6 +16,7 @@ export default function Timer() {
       decreaseTimeticks();
     }, 1000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -23,8 +24,8 @@ export default function Timer() {
       direction={{ xs: 'row', sm: 'column' }}
       spacing={{ xs: 1, sm: 2}}
     >
-      <CountDown isActive={currentPlayer == 0} timeTicks={timeTicks1}/>
-      <CountDown isActive={currentPlayer == 1} timeTicks={timeTicks2}/>
+      <CountDown isActive={currentPlayer === 0} timeTicks={timeTicks1}/>
+      <CountDown isActive={currentPlayer === 1} timeTicks={timeTicks2}/>
     </Stack>
   );
 }

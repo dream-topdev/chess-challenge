@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import { Button } from '@mui/material';
 import { useLottie } from "lottie-react";

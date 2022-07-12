@@ -1,4 +1,3 @@
-import { useState, } from "react";
 import { Chess } from 'chess.js'
 import { Chessboard } from "react-chessboard";
 import usePlayerStore from "../store/usePlayerStore";

@@ -31,7 +31,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (isPlaying == false)
+    if (isPlaying === false)
       setSplashModal(true);
   }, [isPlaying])
 

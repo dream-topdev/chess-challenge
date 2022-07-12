@@ -10,7 +10,7 @@ const decreaseTimeticks = async (set, get) => {
     currentPlayer
   } = get();
 
-  if (isPlaying == false)
+  if (isPlaying === false)
     return;
   
   // when the current players time is up, then end the game
@@ -23,8 +23,8 @@ const decreaseTimeticks = async (set, get) => {
   }
 
   set({
-    timeTicks1: currentPlayer == 0 ? timeTicks1 - 1 : timeTicks1,
-    timeTicks2: currentPlayer == 1 ? timeTicks2 - 1 : timeTicks2
+    timeTicks1: currentPlayer === 0 ? timeTicks1 - 1 : timeTicks1,
+    timeTicks2: currentPlayer === 1 ? timeTicks2 - 1 : timeTicks2
   });
 }
 

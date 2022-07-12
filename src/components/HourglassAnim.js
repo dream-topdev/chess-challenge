@@ -20,6 +20,7 @@ const CountDown = ({ isActive }) => {
       play();
     else
       stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive])
 
   return <>{View}</>;
