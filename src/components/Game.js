@@ -1,8 +1,7 @@
 import { useState, } from "react";
-import './App.css';
 import { Chess } from 'chess.js'
 import { Chessboard } from "react-chessboard";
-import usePlayerStore from "./store/usePlayerStore";
+import usePlayerStore from "../store/usePlayerStore";
 
 function Game({ boardWidth }) {
   const {

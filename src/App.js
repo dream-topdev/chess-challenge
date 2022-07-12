@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Game from './Game';
+import Game from './components/Game';
 import { Stack } from '@mui/material';
 import Timer from './components/Timer';
 import ActionButtons from './components/ActionButtons';
