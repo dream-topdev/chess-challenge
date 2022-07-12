@@ -119,12 +119,8 @@ const startGame = async (set, get, newBoard) => {
 }
 
 const endGame = async (set, get, winner) => {
-  const {
-    boardState,
-  } = get();  
   set({
     isPlaying: false,
-    winner: winner
   });
 }
   

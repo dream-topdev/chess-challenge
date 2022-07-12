@@ -17,7 +17,10 @@ export default function ActionButtons() {
   } = usePlayerStore(state => state);
   
   return (
-    <Container maxWidth="sm">
+    <Stack
+      direction={{ xs: 'row', sm: 'column' }}
+      spacing={{ xs: 1, sm: 2, md: 4 }}
+    >
       <IconButton
         disabled={!isUndoable()}
         color="primary"
@@ -34,6 +37,6 @@ export default function ActionButtons() {
       >
         <RedoIcon />
       </IconButton>
-    </Container>
+    </Stack>
   );
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Game from './Game';
 import { Stack } from '@mui/material';
@@ -18,8 +19,10 @@ export default function App() {
   useEffect(() => {
     function handleResize() {
       if (!document.getElementsByClassName('container').length) return;
-      const display = document.getElementsByClassName('container')[0];
-      setChessboardSize(display.offsetWidth - 20);
+      const display = document.getElementsByTagName('body')[0];
+      const dHeight = document.body.clientHeight;
+      const paneWidth = Math.min(dHeight, display.offsetWidth > 600 ? display.offsetWidth - 150 : display.offsetWidth);
+      setChessboardSize(paneWidth);
     }
 
     window.addEventListener('resize', handleResize);
@@ -28,7 +31,13 @@ export default function App() {
   }, []);
 
   return (
-    <Grid container spacing={2}>
+    <Box   
+      className="container"  
+      sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', sm: 'row' },
+      }}
+    >
       <Modal
         open={splashModal}
         onClose={() => {}}
@@ -38,15 +47,28 @@ export default function App() {
           startGame();
         }}/>
       </Modal>
-      <Grid className="container" item xs={8}>
+      <Box 
+        sx={{
+          flex: 1,
+        }}
+      >
         <Game boardWidth={chessboardSize}/>
-      </Grid>
-      <Grid item xs={2}>
-        <Stack>
+      </Box>
+      <Box      
+        sx={{
+          width: {xs: '100%', sm: 150},
+        }}
+      >
+        <Stack
+          direction={{ xs: 'row', sm: 'column' }}
+          spacing={{ xs: 1, sm: 2}}
+          alignItems="center"
+          justifyContent="center"
+        >
           <Timer/>
           <ActionButtons/>
         </Stack>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 }

@@ -1,28 +1,16 @@
-import React, { useEffect } from "react";
-import { useLottie } from "lottie-react";
-import countDownAnimation from "../assets/countdown.json";
+import { useEffect } from 'react';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import HourglassAnim from './HourglassAnim';
+import { formatInterval } from '../utils/utils';
 
-const CountDown = ({ isActive }) => {
-  const options = {
-    animationData: countDownAnimation,
-    loop: true,
-    autoplay: false,
-    rendererSettings: {
-      width: 40,
-      height: 50
-    }
-  };
-
-  const { View, play, stop } = useLottie(options);
-
-  useEffect(() => {
-    if (isActive)
-      play();
-    else
-      stop();
-  }, [isActive])
-
-  return <>{View}</>;
-};
-
-export default CountDown;
+export default function CountDown({ isActive, timeTicks}) {
+  return (
+    <Box sx={{flexDirection: 'row', display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: 80}}>
+      <HourglassAnim isActive={isActive}/>
+      <Typography color="text.primary" align="center">
+        {formatInterval(timeTicks)}
+      </Typography>
+    </Box>
+  );
+}
